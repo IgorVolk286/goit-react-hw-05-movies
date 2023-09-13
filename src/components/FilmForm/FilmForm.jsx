@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { fetchMovieDetals } from 'components/Api';
-
+import { Loader } from '../loader/Loader';
 export const FilmForm = ({ movie_id }) => {
   const [movieDetals, setMovieDetals] = useState({});
   const [load, setLoad] = useState(false);
@@ -14,6 +14,7 @@ export const FilmForm = ({ movie_id }) => {
   }, [movie_id]);
   return (
     <div>
+      {load && <Loader />}
       <div>
         <img
           src={`https://image.tmdb.org/t/p/w500/${movieDetals.backdrop_path}`}
