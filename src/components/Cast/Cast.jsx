@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Loader } from '../loader/Loader';
 export const Cast = () => {
   const { movie_id } = useParams();
-  // console.log(movie_id);
+
   const [castList, setCastList] = useState([]);
   const [load, setLoad] = useState(false);
 

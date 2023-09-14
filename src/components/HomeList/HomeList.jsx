@@ -20,10 +20,10 @@ export const HomeList = () => {
       {load && <Loader />}
       <h1>Trending Today</h1>
       <ul>
-        {dataList.map(({ title, id }) => {
+        {dataList.map(({ title, id, name }) => {
           return (
             <li key={id} id={id}>
-              <Link to={`/movies/${id}`}>{title} </Link>
+              <Link to={`/movies/${id}`}> {title ? title : name}</Link>
             </li>
           );
         })}

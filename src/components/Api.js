@@ -5,6 +5,15 @@ const headers = {
   Authorization: KEY,
 };
 
+export const fetchMovies = async query => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`,
+    { headers }
+  );
+  const movies = await response.json();
+  return movies;
+};
+
 export const fetchHomeList = async () => {
   const response = await fetch(
     'https://api.themoviedb.org/3/trending/all/day?language=en-US',
@@ -19,8 +28,8 @@ export const fetchMovieDetals = async id => {
     `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
     { headers }
   );
-  const MovieDetals = await response.json();
-  return MovieDetals;
+  const movieDetals = await response.json();
+  return movieDetals;
 };
 
 export const fetchCast = async id => {
