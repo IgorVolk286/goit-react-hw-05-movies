@@ -1,17 +1,24 @@
 import { useState, useEffect } from 'react';
 import { fetchMovieDetals } from 'components/Api';
 import { Loader } from '../loader/Loader';
+
+
+
 export const FilmForm = ({ movie_id }) => {
   const [movieDetals, setMovieDetals] = useState({});
   const [load, setLoad] = useState(false);
 
   useEffect(() => {
+    if (!movie_id) {
+      return;
+    }
     setLoad(true);
     fetchMovieDetals(movie_id)
       .then(data => setMovieDetals(data))
-      .catch(error => alert('error.message'))
+      .catch(error => alert(error.message))
       .finally(() => setLoad(false));
   }, [movie_id]);
+
   return (
     <div>
       {load && <Loader />}

@@ -3,7 +3,6 @@ import { FilmForm } from '../components/FilmForm/FilmForm';
 
 const MovieDetails = () => {
   const { movie_id } = useParams();
-  // console.log(movie_id);
 
   return (
     <div>

@@ -11,7 +11,7 @@ export const HomeList = () => {
     setLoad(true);
     fetchHomeList()
       .then(data => setDataList(data.results))
-      .catch(error => alert('error.message'))
+      .catch(error => alert(error.message))
       .finally(() => setLoad(false));
   }, []);
 

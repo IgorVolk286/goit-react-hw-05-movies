@@ -37,7 +37,7 @@ export const FilmSMovies = ({ query }) => {
       {movies.map(({ title, id }) => {
         return (
           <ul>
-            <Link to="/movies/:movieId">
+            <Link to={`/movies/${id}`}>
               <li key={id}>{title}</li>
             </Link>
           </ul>
