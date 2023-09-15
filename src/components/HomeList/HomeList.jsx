@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Loader } from '../loader/Loader';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { fetchHomeList } from 'components/Api';
+
+import { HomeItem, TitleHome, HomelistWrap } from './HomeList styled';
 
 export const HomeList = () => {
   const [dataList, setDataList] = useState([]);
   const [load, setLoad] = useState(false);
+
+  const location = useLocation();
 
   useEffect(() => {
     setLoad(true);
@@ -14,20 +18,22 @@ export const HomeList = () => {
       .catch(error => alert(error.message))
       .finally(() => setLoad(false));
   }, []);
-
+  console.log(location);
   return (
-    <div>
+    <HomelistWrap>
       {load && <Loader />}
-      <h1>Trending Today</h1>
+      <TitleHome>Trending Today</TitleHome>
       <ul>
-        {dataList.map(({ title, id, name }) => {
+        {dataList.map(({ title, id }) => {
           return (
-            <li key={id} id={id}>
-              <Link to={`/movies/${id}`}> {title ? title : name}</Link>
-            </li>
+            <HomeItem key={id} id={id}>
+              <Link to={`/movies/${id}`} state={{ from: location }}>
+                {title}
+              </Link>
+            </HomeItem>
           );
         })}
       </ul>
-    </div>
+    </HomelistWrap>
   );
 };

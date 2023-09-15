@@ -1,15 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { fetchMovieDetals } from 'components/Api';
 import { Loader } from '../loader/Loader';
 import { Img, Card } from './FilmForm styled';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export const FilmForm = ({ movie_id }) => {
   const [movieDetals, setMovieDetals] = useState({});
   const [load, setLoad] = useState(false);
   const { backdrop_path, title, vote_average, overview } = movieDetals;
-  console.log(movieDetals);
+  const defaultImg =
+    '<https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700>';
+  const location = useLocation();
 
+  const backLocation = useRef(location.state?.from ?? '/movies');
+  console.log(backLocation);
+  console.log(location);
   useEffect(() => {
     if (!movie_id) {
       return;
@@ -23,13 +28,18 @@ export const FilmForm = ({ movie_id }) => {
 
   return (
     <div>
-      <Link to="/">GO BACK</Link>
+      <Link to={backLocation.current}>GO BACK</Link>
       <Card>
         {load && <Loader />}
         <div>
           <Img
-            src={`https://image.tmdb.org/t/p/w500/${backdrop_path}`}
-            alt={title}
+            src={
+              backdrop_path
+                ? `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+                : defaultImg
+            }
+            alt="poster"
+            width={250}
           />
         </div>
         <div>

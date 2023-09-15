@@ -10,7 +10,7 @@ export const Form = ({ submitForm }) => {
   const submit = event => {
     event.preventDefault();
     submitForm(search);
-    setSearch(' ');
+    // setSearch(' ');
   };
   return (
     <form onSubmit={submit}>

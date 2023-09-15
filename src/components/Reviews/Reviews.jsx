@@ -1,13 +1,15 @@
 import { useParams } from 'react-router-dom';
 import { fetchReviews } from 'components/Api';
 import { useEffect, useState } from 'react';
-import { Loader } from '../components/loader/Loader';
-
+import { Loader } from '../loader/Loader';
+import { Wrap, Content } from './Reviews styled';
 export const Reviews = () => {
   const { movie_id } = useParams();
   console.log(movie_id);
   const [reviewsList, setReviewsList] = useState([]);
   const [load, setLoad] = useState(false);
+  const message = ` We don't have any reviews for with movie`;
+
   useEffect(() => {
     if (!movie_id) {
       return;
@@ -20,18 +22,22 @@ export const Reviews = () => {
   }, [movie_id]);
 
   return (
-    <div>
+    <Wrap>
       {load && <Loader />}
-      <ul>
-        {reviewsList.map(({ author, content }) => {
-          return (
-            <li>
-              <h3>Autor:{author}</h3>
-              <p>{content}</p>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+      {reviewsList.length !== 0 ? (
+        <ul>
+          {reviewsList.map(({ author, content }) => {
+            return (
+              <li>
+                <h3>Autor:{author}</h3>
+                <Content>{content}</Content>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        message
+      )}
+    </Wrap>
   );
 };
