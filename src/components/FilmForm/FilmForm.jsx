@@ -27,8 +27,8 @@ export const FilmForm = ({ movie_id }) => {
       .finally(() => setLoad(false));
   }, [movie_id]);
 
-  console.log(movieDetals);
-  const { backdrop_path, title, vote_average, overview } = movieDetals;
+  // console.log(movieDetals);
+  const { backdrop_path, title, vote_average, name, overview } = movieDetals;
   return (
     <div>
       <Link to={backLocation.current}>GO BACK</Link>
@@ -46,8 +46,8 @@ export const FilmForm = ({ movie_id }) => {
           />
         </div>
         <div>
-          <h1>{title}</h1>
-          <p> User score: {vote_average * 10}%</p>
+          <h1>{title || name}</h1>
+          <p> User score: {Math.round(vote_average * 10)}%</p>
           <h3>Overview </h3>
           <p>{overview}</p>
           <h3>Genres</h3>
