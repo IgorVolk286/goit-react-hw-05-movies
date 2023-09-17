@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { lazy } from 'react';
 import { Cast } from '../components/Cast/Cast';
 import { Reviews } from './Reviews/Reviews';
+import NotFound from '../pages/NotFound';
 import { Layout } from './Layout/Layout';
 import { GlobalStyle } from './Global styled';
 const Home = lazy(() => import('../pages/Home'));
@@ -20,6 +21,7 @@ export const App = () => {
             <Route path="reviews" element={<Reviews />} />
           </Route>
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <GlobalStyle />
     </>

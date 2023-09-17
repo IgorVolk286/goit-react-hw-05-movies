@@ -14,7 +14,7 @@ export const Layout = () => {
           </Item>
         </ListNav>
       </Header>
-      <Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </Suspense>
     </LayoutW>
