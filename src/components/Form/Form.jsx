@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 export const Form = ({ submitForm }) => {
   const [search, setSearch] = useState(' ');
@@ -18,4 +19,8 @@ export const Form = ({ submitForm }) => {
       <button type="submit"> Search </button>
     </form>
   );
+};
+
+Form.propTypes = {
+  submitForm: PropTypes.func,
 };

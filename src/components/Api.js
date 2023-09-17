@@ -37,6 +37,7 @@ export const fetchCast = async id => {
     `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US`,
     { headers }
   );
+
   const CastList = await response.json();
   return CastList;
 };

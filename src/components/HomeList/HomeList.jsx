@@ -13,6 +13,7 @@ export const HomeList = () => {
 
   useEffect(() => {
     setLoad(true);
+
     fetchHomeList()
       .then(data => setDataList(data.results))
       .catch(error => alert(error.message))

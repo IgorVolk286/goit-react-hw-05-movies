@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { LayoutW, ListNav, Header, StyledLink, Item } from './Layout styled';
-
+import { Suspense } from 'react';
 export const Layout = () => {
   return (
     <LayoutW>
@@ -14,7 +14,9 @@ export const Layout = () => {
           </Item>
         </ListNav>
       </Header>
-      <Outlet />
+      <Suspense>
+        <Outlet />
+      </Suspense>
     </LayoutW>
   );
 };

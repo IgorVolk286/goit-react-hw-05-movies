@@ -15,6 +15,7 @@ export const Reviews = () => {
       return;
     }
     setLoad(true);
+
     fetchReviews(movie_id)
       .then(data => setReviewsList(data.results))
       .catch(error => alert(error.message))

@@ -7,14 +7,15 @@ import { Link, useLocation } from 'react-router-dom';
 export const FilmForm = ({ movie_id }) => {
   const [movieDetals, setMovieDetals] = useState({});
   const [load, setLoad] = useState(false);
-  const { backdrop_path, title, vote_average, overview } = movieDetals;
+
   const defaultImg =
     '<https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700>';
-  const location = useLocation();
 
+  const location = useLocation();
   const backLocation = useRef(location.state?.from ?? '/movies');
-  console.log(backLocation);
-  console.log(location);
+  // console.log(backLocation);
+  // console.log(location);
+
   useEffect(() => {
     if (!movie_id) {
       return;
@@ -26,6 +27,8 @@ export const FilmForm = ({ movie_id }) => {
       .finally(() => setLoad(false));
   }, [movie_id]);
 
+  console.log(movieDetals);
+  const { backdrop_path, title, vote_average, overview } = movieDetals;
   return (
     <div>
       <Link to={backLocation.current}>GO BACK</Link>
@@ -48,6 +51,7 @@ export const FilmForm = ({ movie_id }) => {
           <h3>Overview </h3>
           <p>{overview}</p>
           <h3>Genres</h3>
+          {/* <p>{movieDetals.genres.map(el => el.name).join(', ')}</p> */}
         </div>
       </Card>
     </div>

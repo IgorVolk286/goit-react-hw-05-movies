@@ -1,6 +1,7 @@
 import { Outlet, useParams } from 'react-router-dom';
 import { FilmForm } from '../../components/FilmForm/FilmForm';
 import { CastLink, TitleReviews } from './MoviesDetals styled';
+import { Suspense } from 'react';
 
 const MovieDetails = () => {
   const { movie_id } = useParams();
@@ -17,7 +18,9 @@ const MovieDetails = () => {
           <CastLink to="reviews">Reviews</CastLink>
         </li>
       </ul>
-      <Outlet />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };

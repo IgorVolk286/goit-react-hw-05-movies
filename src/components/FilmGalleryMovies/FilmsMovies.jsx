@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Loader } from '../loader/Loader';
 import { fetchMovies } from 'components/Api';
+import PropTypes from 'prop-types';
 
 export const FilmSMovies = ({ query }) => {
   const [movies, setMovies] = useState([]);
@@ -13,10 +14,17 @@ export const FilmSMovies = ({ query }) => {
       return;
     } else {
       setLoad(true);
+
+      const controller = new AbortController();
+
       fetchMovies(query)
         .then(data => setMovies(data.results))
         .catch(error => console.log(error))
         .finally(() => setLoad(false));
+
+      return () => {
+        controller.abort();
+      };
     }
   }, [query]);
 
@@ -37,4 +45,8 @@ export const FilmSMovies = ({ query }) => {
       })}
     </div>
   );
+};
+
+FilmSMovies.propTypes = {
+  query: PropTypes.string,
 };
