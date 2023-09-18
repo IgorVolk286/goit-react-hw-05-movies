@@ -4,10 +4,11 @@ import { Loader } from '../loader/Loader';
 import { fetchMovies } from 'components/Api';
 import PropTypes from 'prop-types';
 
-export const FilmSMovies = ({ query }) => {
+export const FilmsMovies = ({ query }) => {
   const [movies, setMovies] = useState([]);
   const [load, setLoad] = useState(false);
   const location = useLocation();
+  console.log(location);
 
   useEffect(() => {
     if (!query) {
@@ -35,10 +36,8 @@ export const FilmSMovies = ({ query }) => {
       {movies.map(({ title, id }) => {
         return (
           <ul>
-            <Link to={`/movies/${id}`}>
-              <li key={id} state={{ from: location }}>
-                {title}
-              </li>
+            <Link to={`/movies/${id}`} state={{ from: location }}>
+              <li key={id}>{title}</li>
             </Link>
           </ul>
         );
@@ -47,6 +46,6 @@ export const FilmSMovies = ({ query }) => {
   );
 };
 
-FilmSMovies.propTypes = {
+FilmsMovies.propTypes = {
   query: PropTypes.string,
 };

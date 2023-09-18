@@ -1,25 +1,32 @@
-// import { useState } from 'react';
-import { Form } from '../components/Form/Form';
-import { FilmSMovies } from '../components/FilmGalleryMovies/FilmsMovies';
+import { useState } from 'react';
+
+import { FilmsMovies } from '../components/FilmGalleryMovies/FilmsMovies';
 import { useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
-  // const [query, setQuery] = useState(' ');
   const [searchParams, setSearchParams] = useSearchParams();
+  const [search, setSearch] = useState(' ');
+  const query = searchParams.get('query') ?? ' ';
 
-  const query = searchParams.get('query');
+  const change = event => {
+    setSearch(event.currentTarget.value);
+  };
 
-  const handlerSubmit = value => {
-    if (value === ' ') {
+  const handlerSubmit = event => {
+    event.preventDefault();
+    if (search === ' ') {
       return setSearchParams({});
     }
-    setSearchParams({ query: value });
+    setSearchParams({ query: search });
   };
 
   return (
     <div>
-      <Form submitForm={handlerSubmit} />
-      <FilmSMovies query={query} />
+      <form onSubmit={handlerSubmit}>
+        <input onChange={change} name="search" value={search} type="text" />
+        <button type="submit"> Search </button>
+      </form>
+      {search.length > 0 && <FilmsMovies query={query} />}
     </div>
   );
 };

@@ -1,14 +1,22 @@
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useParams, useLocation, Link } from 'react-router-dom';
 import { FilmForm } from '../../components/FilmForm/FilmForm';
 import { CastLink, TitleReviews } from './MoviesDetals styled';
-import { Suspense } from 'react';
-
+import { Suspense, useRef } from 'react';
+//
 const MovieDetails = () => {
   const { movie_id } = useParams();
+  const location = useLocation();
 
+  const backLocation = useRef(location.state?.from ?? '/movies');
+
+  // console.log(backLocation);
+  // console.log(location);
   return (
     <div>
+      <Link to={backLocation.current}>GO BACK</Link>
+
       <FilmForm movie_id={movie_id} />
+
       <TitleReviews>Addishional information</TitleReviews>
       <ul>
         <li>
